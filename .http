@@ -1,0 +1,135 @@
+@baseurl=http://localhost:3000
+@orders={{baseurl}}/orders
+@customers={{baseurl}}/customers
+@services={{baseurl}}/services
+@filials={{baseurl}}/filials
+@serviceTypes={{baseurl}}/serviceTypes
+
+### Home
+GET {{baseurl}}
+
+###
+
+##### Service ######
+
+### Get services
+GET {{services}}
+
+###
+
+##### Customer ######
+
+### Add Customer 
+POST {{customers}}
+content-type: application/json
+
+{
+    "firstName": "Anton",
+    "lastName": "Antonov",
+    "surName": "Opapa",
+    "phoneNumber": "+380935637656"
+}
+
+###
+
+### Update Customer 
+PATCH {{customers}}/1
+content-type: application/json
+
+{
+    "firstName": "Anton",
+    "lastName": "Antonov",
+    "surName": "Opapa",
+    "phoneNumber": "+380935637656"
+}
+
+###
+
+### Find Customer 
+GET {{customers}}?lastName=Doe
+
+###
+
+### Get Customer 
+GET {{customers}}/5
+
+###
+
+### Get Customers
+GET {{customers}}
+
+###
+
+##### Order #####
+
+### Get orders
+GET {{orders}}
+
+###
+
+### Get order
+GET {{orders}}/100
+
+###
+
+### Get order by filialId
+GET {{orders}}/filial/2
+
+###
+
+### Get orders sum
+GET {{orders}}/sum/2022
+
+###
+
+### Get orders sum by month
+GET {{orders}}/month/2022
+
+###
+
+### Create order
+POST {{orders}}
+content-type: application/json
+
+{
+    "customerId": "2",
+    "serviceId": "2",
+    "filialId": "3",
+    "urgency": "3",
+    "difficulty": "3",
+    "ordStatus": "2",
+    "receiveDate": "2024-02-20",
+    "returnDate": "2024-03-24"
+}
+
+###
+
+### Update order
+POST {{orders}}/100
+content-type: application/json
+
+{
+    "serviceId": "2",
+    "filialId": "3",
+    "urgency": "3",
+    "difficulty": "3",
+    "ordStatus": "2",
+    "receiveDate": "2024-02-20",
+    "returnDate": "2024-03-24"
+}
+
+###
+
+##### Filial #####
+
+### Get Filials
+GET {{filials}}
+
+###
+
+##### Service type #####
+
+### Get service types
+GET {{serviceTypes}}
+
+###

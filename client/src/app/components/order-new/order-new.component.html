@@ -1,0 +1,78 @@
+<div *ngFor="let form of formArray; let i = index">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="card mb-2 mt-2">
+        <div class="card-header">
+          Нове замовлення
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label for="serviceId {{ i }}">Вибрати послугу:</label>
+              <select class="form-control" id="serviceId {{ i }}" aria-describedby="serviceId"
+                formControlName="serviceId" required>
+                <option *ngFor="let service of services" value="{{service.id}}">{{service.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filialId {{ i }}">Вибрати філіал:</label>
+              <select class="form-control" id="filialId {{ i }}" aria-describedby="filialId" formControlName="filialId"
+                required>
+                <option *ngFor="let filial of filials" value="{{filial.id}}">{{filial.name + ', ' + filial.location}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="difficulty {{ i }}">Вибрати складність:</label>
+              <select class="form-control" id="difficulty {{ i }}" aria-describedby="difficulty" formControlName="difficulty"
+                required>
+                <option *ngFor="let level of difficultyOrUrgency" value="{{level.id}}">{{level.value}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="urgency {{ i }}">Вибрати терміновість:</label>
+              <select class="form-control" id="urgency {{ i }}" aria-describedby="urgency" formControlName="urgency" required>
+                <option *ngFor="let level of difficultyOrUrgency" value="{{level.id}}">{{level.value}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ordStatus {{ i }}">Вибрати статус:</label>
+              <select class="form-control" id="ordStatus {{ i }}" aria-describedby="ordStatus" formControlName="ordStatus"
+                required>
+                <option *ngFor="let status of statuses" value="{{status.id}}">{{status.value}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="receiveDate {{ i }}">Дата отримання</label>
+              <input type="date" class="form-control" id="receiveDate {{ i }}" aria-describedby="receiveDate"
+                formControlName="receiveDate" required>
+              <div *ngIf="form.get('receiveDate')!.hasError('required') && form.get('receiveDate')?.touched">
+                Необхідно вказати дату отримання.
+              </div>
+              <div *ngIf="form.get('receiveDate')!.hasError('invalidDate')">
+                Дата отримання має бути у форматі РРРР-ММ-ДД.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="returnDate {{ i }}">Дата видачі</label>
+              <input type="date" class="form-control" id="returnDate {{ i }}" aria-describedby="returnDate"
+                formControlName="returnDate" required>
+              <div *ngIf="form.get('returnDate')!.hasError('required') && form.get('returnDate')?.touched">
+                Необхідно вказати дату видачі.
+              </div>
+              <div *ngIf="form.get('returnDate')!.hasError('invalidDate')">
+                Дата видачі має бути у форматі РРРР-ММ-ДД.
+              </div>
+            </div>
+            <div *ngIf="i === formArray.length - 1">
+              <button type="submit" class="btn btn-primary mt-4 marRight" [disabled]="form.invalid">Створити</button>
+              <button class="btn btn-success mt-4 marRight" (click)="duplicateForm(i)">Дублювати</button>
+              <button class="btn btn-success mt-4 marRight" (click)="addForm()">Додати</button>
+              <button class="btn btn-danger mt-4" (click)="deleteForm(i)" [disabled]="formArray.length === 1">Видалити</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

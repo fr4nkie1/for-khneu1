@@ -1,0 +1,18 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Назва</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">Всі замовлення</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let filial of filials">
+      <td>{{ filial.name }}</td>
+      <td>{{ filial.location }}</td>
+      <td>
+        <a routerLink="/orders/filial/{{filial.id}}" type="button" class="btn btn-primary">Подивитися</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

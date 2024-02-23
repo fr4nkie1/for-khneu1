@@ -1,0 +1,16 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Назва</th>
+      <th scope="col">Тип</th>
+      <th scope="col">Ціна(грн)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let service of services">
+      <td>{{ service.name }}</td>
+      <td>{{ service.type }}</td>
+      <td>{{ service.cost }}</td>
+    </tr>
+  </tbody>
+</table>

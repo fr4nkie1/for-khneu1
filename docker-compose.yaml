@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mysql_server:
+    image: mysql:8.1.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: cleaner
+      MYSQL_PASSWORD: rootroot
+      MYSQL_ROOT_PASSWORD: rootroot
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - "./server/scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./server/scripts/data.sql:/docker-entrypoint-initdb.d/2.sql"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_server
+    depends_on:
+      - mysql_server
+    networks:
+      - app-network
+  
+  app:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+      MYSQL_HOST: mysql_server
+      MYSQL_DATABASE: cleaner
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootroot
+      MYSQL_PORT: 3306
+      MYSQL_CONNECTION_LIMIT: 10
+    depends_on:
+      - mysql_server
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  front:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/front
+    ports:
+      - "4200:4200"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+
+networks:
+  app-network:

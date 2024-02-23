@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-4">
+    <div class="card mb-2 mt-2">
+      <div class="card-header">
+        Новий клієнт
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+          <div class="form-group">
+            <label for="firstName">Ім'я</label>
+            <input type="text" class="form-control" placeholder="Іван" id="firstName" aria-describedby="firstName"
+              formControlName="firstName" required>
+            <div *ngIf="myForm.get('firstName')!.hasError('required') && myForm.get('firstName')?.touched">
+              Необхідно вказати ім'я.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Прізвище</label>
+            <input type="text" class="form-control" placeholder="Іванов" id="lastName" aria-describedby="lastName"
+              formControlName="lastName" required>
+            <div *ngIf="myForm.get('lastName')!.hasError('required') && myForm.get('lastName')?.touched">
+              Необхідно вказати прізвище.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="surName">По батькові</label>
+            <input type="text" class="form-control" placeholder="Іванович" id="surName" aria-describedby="surName"
+              formControlName="surName" required>
+            <div *ngIf="myForm.get('surName')!.hasError('required') && myForm.get('surName')?.touched">
+              Необхідно вказати по батькові.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Номер телефона</label>
+            <input type="text" class="form-control" placeholder="0939393933" id="phoneNumber" aria-describedby="phoneNumber"
+              formControlName="phoneNumber" required pattern="[0-9]{10}">
+            <div *ngIf="myForm.get('phoneNumber')!.hasError('required') && myForm.get('phoneNumber')?.touched">
+              Необхідно вказати номер телефона.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-4" [disabled]="myForm.invalid">Cтворити</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

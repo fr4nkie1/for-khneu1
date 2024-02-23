@@ -1,0 +1,36 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Номер замовлення</th>
+      <th scope="col">Клієнт</th>
+      <th scope="col">Філіал</th>
+      <th scope="col">Послуга</th>
+      <th scope="col">Сумма до знижки(грн)</th>
+      <th scope="col">Сумма(грн)</th>
+      <th scope="col">Складність</th>
+      <th scope="col">Терміновість</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Дата отримання</th>
+      <th scope="col">Дата видачі</th>
+      <th scope="col">Зробити зміни</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.ordNum }}</td>
+      <td>{{ order.customer.lastName + ' ' + order.customer.firstName + ' ' + order.customer.surName }}</td>
+      <td>{{ order.filial.name + ', ' + order.filial.location }}</td>
+      <td>{{ order.service.name }}</td>
+      <td>{{ order.sbd.toFixed(2) }}</td>
+      <td>{{ order.sum.toFixed(2) }}</td>
+      <td>{{ order.difficulty }}</td>
+      <td>{{ order.urgency }}</td>
+      <td>{{ order.ordStatus }}</td>
+      <td>{{ order.receiveDate }}</td>
+      <td>{{ order.returnDate }}</td>
+      <td>
+        <a routerLink="/orders/upd/{{order.id}}" type="button" class="btn btn-primary">Змінити</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

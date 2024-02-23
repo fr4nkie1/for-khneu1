@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="display-4">Хімчистка</h1>
+      <canvas baseChart class="chart" [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType"
+        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <table>
+      </table>
+      <div class="button-row">
+        <button type="button" class="btn btn-outline-dark margin" (click)="hideOne(0)">
+          Приховати 2022
+        </button>
+        <button type="button" class="btn btn-outline-dark margin" (click)="hideOne(1)">
+          Приховати 2023
+        </button>
+        <button type="button" class="btn btn-outline-dark margin" (click)="hideOne(2)">
+          Приховати 2024
+        </button>
+
+        <button type="button" class="btn btn-outline-dark margin" (click)="showCurrentYear()">
+          Показати
+        </button>
+      </div>
+      <div>
+        <p>Сума за 2022 рік: {{sum2022.toFixed(2)}} грн</p>
+        <p>Сума за 2023 рік: {{sum2023.toFixed(2)}} грн</p>
+        <p>Сума за 2024 рік: {{sum2024.toFixed(2)}} грн</p>
+      </div>
+    </div>
+  </div>
+</div>

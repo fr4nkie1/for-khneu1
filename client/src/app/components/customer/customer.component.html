@@ -1,0 +1,33 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Ім'я</th>
+      <th scope="col">Прізвище</th>
+      <th scope="col">По батькові</th>
+      <th scope="col">Номер телефона</th>
+      <th scope="col">Постіний клієнт</th>
+      <th scope="col">Кількість замовлень</th>
+      <th scope="col">Створити замовлення</th>
+      <th scope="col">Оновити клієнта</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.firstName }}</td>
+      <td>{{ customer.lastName }}</td>
+      <td>{{ customer.surName }}</td>
+      <td>{{ customer.phoneNumber }}</td>
+      <td>{{ customer.isRepeatCustomer ? 'Так' : 'Ні' }}</td>
+      <td>{{ customer.orderCount }}</td>
+      <td>
+        <a routerLink="/orders/{{customer.id}}" type="button" class="btn btn-primary">Замовити</a>
+      </td>
+      <td>
+        <a routerLink="/customers/upd/{{customer.id}}" type="button" class="btn btn-primary">Оновити</a>
+      </td>
+    </tr>
+    <a routerLink="/customers/register" type="button" class="btn btn-primary margin">Зареєструвати нового клієнта</a>
+    <br>
+    <br>
+  </tbody>
+</table>

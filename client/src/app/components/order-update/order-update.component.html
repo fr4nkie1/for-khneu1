@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+  <div class="col-4">
+    <div class="card mb-2 mt-2">
+      <div class="card-header">
+        Оновити замовлення
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+          <div class="form-group">
+            <label for="serviceId">Вибрати послугу:</label>
+            <select class="form-control" id="serviceId" aria-placeholder="dsf" formControlName="serviceId" required>
+              <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filialId">Вибрати філіал:</label>
+            <select class="form-control" id="filialId" formControlName="filialId" required>
+              <option *ngFor="let filial of filials" [value]="filial.id">{{ filial.name + ', ' + filial.location }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="difficulty">Вибрати складність:</label>
+            <select class="form-control" id="difficulty" formControlName="difficulty" required>
+              <option *ngFor="let level of difficultyOrUrgency" [value]="level.id">{{ level.value }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="urgency">Вибрати терміновість:</label>
+            <select class="form-control" id="urgency" formControlName="urgency" required>
+              <option *ngFor="let level of difficultyOrUrgency" [value]="level.id">{{ level.value }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ordStatus">Вибрати статус:</label>
+            <select class="form-control" id="ordStatus" formControlName="ordStatus" required>
+              <option *ngFor="let status of statuses" [value]="status.id">{{ status.value }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="receiveDate">Дата отримання</label>
+            <input type="date" class="form-control" id="receiveDate" formControlName="receiveDate" required>
+            <!-- Add error messages if needed -->
+          </div>
+          <div class="form-group">
+            <label for="returnDate">Дата видачі</label>
+            <input type="date" class="form-control" id="returnDate" formControlName="returnDate" required>
+            <!-- Add error messages if needed -->
+          </div>
+          <button type="submit" class="btn btn-primary mt-4 marRight" [disabled]="myForm.invalid">Оновити</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
